@@ -1,0 +1,17 @@
+{
+  "predef": [ "document", "jQuery", "$", "console" ],
+  "esversion": 6,
+  "globalstrict": true,
+  "browserify": true,
+  "globals": {
+  	"describe": false,
+  	"it": false,
+  	"expect": false,
+  	"before": false,
+  	"beforeEach": false,
+  	"after": false,
+  	"afterEach": false,
+    "jasmine": false
+  },
+  "jasmine": true
+}
