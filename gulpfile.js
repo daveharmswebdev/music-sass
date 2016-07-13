@@ -12,6 +12,9 @@ let sourcemaps = require('gulp-sourcemaps');
 let jasmine = require('gulp-jasmine');
 let jasmineSpecReporter = require('jasmine-spec-reporter');
 let sass = require('gulp-sass');
+// for handlebars
+// let hbsfy = require('hbsfy');
+// end for handlebars
 
 let handleError = function(task) {
   return function(err) {
@@ -24,7 +27,6 @@ let handleError = function(task) {
     gutil.log(gutil.colors.bgRed(task + ' error:'), gutil.colors.red(err));
   };
 };
-
 
 /*
   BROWSERIFY SECTION
@@ -115,8 +117,6 @@ gulp.task('watch', function() {
   // Run the link task when any JavaScript file changes
   gulp.watch(['./src/**/*.js'], ['lint', 'specs']);
 
-  // Run the sass task when any SCSS file changes
-  // Remov if not using SASS
   gulp.watch('./src/sass/**/*.scss', ['sass']);
 
   gutil.log(gutil.colors.bgGreen('Watching for changes...'));
