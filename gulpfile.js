@@ -88,7 +88,7 @@ gulp.task('specs', function() {
   Delete or comment out if you are not using SASS
  */
 gulp.task('sass', function() {
-  return gulp.src('./src/sass/*.scss')
+  return gulp.src('./src/scss/*.scss')
     // sourcemaps + sass + error handling
     .pipe(sourcemaps.init())
     .pipe(sass({
@@ -106,7 +106,7 @@ gulp.task('sass', function() {
     }))
     // write sourcemaps to a specific directory
     // give it a file and save
-    .pipe(gulp.dest('./dist/css'));
+    .pipe(gulp.dest('./dist'));
 });
 /*
   WATCH TASK SECTION
@@ -117,7 +117,7 @@ gulp.task('watch', function() {
   // Run the link task when any JavaScript file changes
   gulp.watch(['./src/**/*.js'], ['lint', 'specs']);
 
-  gulp.watch('./src/sass/**/*.scss', ['sass']);
+  gulp.watch('./src/scss/**/*.scss', ['sass']);
 
   gutil.log(gutil.colors.bgGreen('Watching for changes...'));
 });

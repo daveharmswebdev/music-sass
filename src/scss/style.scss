@@ -1,0 +1,34 @@
+$font-roboto: 'Roboto', sans-serif;
+// $font-robotoSlab: font-family: 'Roboto Slab', serif;
+
+.standardDiv {
+	border: 1px solid black;
+	margin: 0.5rem;
+	padding: 0.5rem;
+}
+
+nav {
+	@extend .standardDiv;
+	font-family: $font-roboto;
+	.nav__links__items {
+		display: inline-block;
+	}
+}
+
+.filter {
+	@extend .standardDiv;
+	font-family: $font-roboto;
+	.filter__row {
+		select {
+			margin: 1rem;
+		}
+		label {
+			margin: 1rem;
+		}
+	}
+	.filter__submit {
+		button {
+			margin: 1rem;
+		}
+	}
+}

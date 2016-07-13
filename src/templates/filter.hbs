@@ -1,0 +1,26 @@
+<div class="col-xs-6 filter">
+	<div class="filter__row">
+		<label for=" artistFilter">Artist
+			<select class='filter__input' name="" id="artistFilter">
+				<option value="No Selection" selected>No Selection</option>
+				{{#each artists}}
+				<option value="{{this}}">{{this}}</option>
+				{{/each}}
+			</select>
+		</label>
+	</div>
+	<div class="filter__row">
+		<label for="albumFilter">Album
+			<select class='filter__input' name="" id="albumFilter">
+				<option value="No Selection" selected>No Selection</option>
+				{{#each albums}}
+				<option value="{{this}}">{{this}}</option>
+				{{/each}}
+			</select>
+		</label>
+	</div>
+	<div class='filter__submit'>
+		<button class="btn btn-default" id="btnFilter" type="">Filter</button>
+		<button class="btn btn-default" id="btnClearFilter" type="">Clear</button>
+	</div>					
+</div>
