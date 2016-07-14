@@ -15,8 +15,12 @@ Handlebars.registerPartial('list', list);
 
 var render = {};
 render.renderBody = function(data) {
-	console.log('data: ', data)
-	$('body').prepend(body({songs: data}));
+	console.log('data: ', data);
+	$('body').prepend(body({
+		songs: data.songs,
+		albums: data.albums,
+		artists: data.artists
+	}));
 };
 
 module.exports = render;

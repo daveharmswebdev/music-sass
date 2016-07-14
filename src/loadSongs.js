@@ -1,18 +1,25 @@
 'use strict';
 
 // model
-var load = {};
-var $ = require('jQuery');
-var _ = require('underscore');
-var render = require('../src/render.js');
-var songs = [];
+const load = {};
+const $ = require('jQuery');
+const _ = require('underscore');
+const render = require('../src/render.js');
+let songs;
 
 load.read = function() {
     $.ajax({
         url: 'data/songs.json'
     }).done(function(response) {
-        let songs = response.songs;
-    	render.renderBody(songs);
+        songs = response.songs;
+        // creates data object to send to the renderBody function
+        // and dispay initial screen on load
+        let data = {};
+        data.songs = songs;
+        data.artists = load.getArtists();
+        data.albums = load.getAlbums();
+        console.log(data);
+    	render.renderBody(data);
     });
 };
 load.setSongs = function(song) {
@@ -35,11 +42,13 @@ load.clearFilter = function() {
 	render.renderSongs(songs);
 };
 load.getArtists = function() {
+    // sorts and removes duplicates
     var artists = [];
     songs.forEach((song) => artists.push(song.artist));
     return _.uniq(artists).sort();
 };
 load.getAlbums = function() {
+    // sorts and removes duplicates
     var albums = [];
     songs.forEach((song) => albums.push(song.album));
     return _.uniq(albums).sort();
