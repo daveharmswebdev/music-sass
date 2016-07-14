@@ -32,3 +32,8 @@ nav {
 		}
 	}
 }
+
+.list {
+	@extend .standardDiv;
+	font-family: $font-roboto;
+}

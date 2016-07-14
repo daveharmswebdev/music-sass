@@ -1,0 +1,44 @@
+{
+  "songs": [
+    {
+      "title": "Thunder Road",
+      "artist": "Bruce Springsteen",
+      "album": "Born To Run"
+    },
+    {
+      "title": "Tangled Up in Blue",
+      "artist": "Bob Dylan",
+      "album": "Blood on the Tracks"
+    },
+    {
+      "title": "Tumbling Dice",
+      "artist": "Rolling Stones",
+      "album": "Exile on Main Street"
+    },
+    {
+      "title": "Street Hassle",
+      "artist": "Lou Reed",
+      "album": "Street Hassle"
+    },
+        {
+      "title": "Rock and Roll Ain't Noise Pollution",
+      "artist": "AC/DC",
+      "album": "Back in Black"
+    },
+    {
+      "title": "Innocence",
+      "artist": "The Airborne Toxic Event",
+      "album": "All I Ever Wanted"
+    },
+    {
+      "title": "I Fought In A War",
+      "artist": "Belle & Sebastian",
+      "album": "Fold Your Hands Child You Walk Like a Peasant"
+    },
+    {
+      "title": "The Boy With The Arab Strap",
+      "artist": "Belle & Sebastian",
+      "album": "The Boy With The Arab Strap"
+    }
+  ]
+}
