@@ -33,7 +33,12 @@ nav {
 	}
 }
 
-.list {
+.list--list {
+	@extend .standardDiv;
+	font-family: $font-roboto;
+}
+
+.add {
 	@extend .standardDiv;
 	font-family: $font-roboto;
 }

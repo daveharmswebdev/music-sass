@@ -1,4 +1,5 @@
 node_modules
 bundle.js
 archive
-todo.txtbundle.js.map
+todo.txt
+bundle.js.map

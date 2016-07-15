@@ -5,25 +5,58 @@ const load = {};
 const $ = require('jQuery');
 const _ = require('underscore');
 const render = require('../src/render.js');
-let songs;
+let songs = [];
+
+function pushToSongs(obj) {
+    $.each(obj.songs, (key, val) => {
+        songs.push(val);
+    });
+    console.log(songs);
+}
 
 load.read = function() {
-    $.ajax({
-        url: 'data/songs.json'
-    }).done(function(response) {
-        songs = response.songs;
-        // creates data object to send to the renderBody function
-        // and dispay initial screen on load
-        let data = {};
-        data.songs = songs;
-        data.artists = load.getArtists();
-        data.albums = load.getAlbums();
-        console.log(data);
-    	render.renderBody(data);
+    return new Promise((resolve, reject) => {
+        $.ajax({
+            // url: 'data/songs.json'
+            url: 'https://music-history-7af37.firebaseio.com/.json'
+        }).done(function(response) {
+            console.log(response);
+            pushToSongs(response);
+            // creates data object to send to the renderBody function
+            // and dispay initial screen on load
+            let data = {};
+            data.songs = songs;
+            data.artists = load.getArtists();
+            data.albums = load.getAlbums();
+            console.log(data);
+            resolve(data);
+        }).fail(function(error) {
+            reject(error);
+        });
     });
 };
 load.setSongs = function(song) {
     songs.push(song);
+    console.log(JSON.stringify(song));
+    // let param = {
+    //     "title": song.title,
+    //     "artist": song.artist,
+    //     "album": song.album
+    // };
+    // $.post("https://music-history-7af37.firebaseio.com/songs.json", param, function(data, status){
+    //     console.log("Data: " + data + "\nStatus: " + status);
+    // });
+    $.ajax({
+        url : "https://music-history-7af37.firebaseio.com/songs.json",
+        type: "POST",
+        data : JSON.stringify(song),
+        success: function(data, textStatus, jqXHR) {
+            console.log(data,textStatus,jqXHR);
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            console.log(jqXHR, textStatus, errorThrown);
+        }
+    });
 };
 load.getSongs = function() {
     return songs;

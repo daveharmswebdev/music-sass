@@ -1,10 +1,43 @@
 'use strict';
 
+const $ = require('jQuery');
 const loadSongs = require('../src/loadSongs.js');
-var render = require('../src/render.js');
+const render = require('../src/render.js');
 
-loadSongs.read();
+let songs;
 
+loadSongs.read().then((data) => {
+	console.log(data);
+	render.renderBody(data);
+	render.renderFilter(data);
+	console.log('data', data);
+	render.renderList(data.songs);
+});
+$('body').on('click', '#addMusicLink', () => {
+	console.log('add music');
+	$('.filter').remove();
+	render.renderAddForm();
+});
+$('body').on('click', '#filterMusicLink', () => {
+	let data = {};
+	data.artists = loadSongs.getArtists();
+	data.albums = loadSongs.getAlbums();
+	console.log(data);
+	$('.add').remove();
+	render.renderFilter(data);
+});
+$('body').on('click', '#addButton', () => {
+	let newSong = {};
+	newSong.title = $('#titleInput').val();
+	newSong.artist = $('#artistInput').val();
+	newSong.album = $('#albumInput').val();
+	loadSongs.setSongs(newSong);
+	$('.list--list').remove();
+	render.renderList(loadSongs.getSongs());	
+	// need to add to songs array
+	// need to push to firebase
+	// rerender list
+});
 
 
 
