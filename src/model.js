@@ -25,13 +25,15 @@ function getSong(songId) {
   });
 }
 
-// function editSong(songId, songObj) {
-//
-// }
+function editSong(songId, songObj) {
+  console.log('edit', songId, songObj);
+  return songsRef.child(songId).update(songObj);
+}
 
 module.exports = {
   getSongs,
   addSong,
   deleteSong,
-  getSong
+  getSong,
+  editSong
 };

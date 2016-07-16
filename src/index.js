@@ -24,8 +24,6 @@ $(function() {
 			album: $("#albumInput").val(),
 			year: $("#yearInput").val()
 		};
-		console.log(songObj);
-
 		return songObj;
 	}
 
@@ -37,6 +35,7 @@ $(function() {
 			render.addForm(song.val());
 			$('#addHeading').html('Edit Song');
 			$('#addButton').html('Edit');
+			$('#addButton').attr('data', songId);
 		});
 	});
 
@@ -51,15 +50,30 @@ $(function() {
 	$('body').on('click', '#addButton', function() {
 		// need to prevent empty songs from being added
 		// need to finish if statement and then add the edit functionality
-		console.log($(this).attr('data') === "add");
-		let songObj = buildSongObj();
-		model.addSong(songObj)
-		.then(function(data) {
-			console.log('saved', data.key);
-			$('.add__controls').each(function() {
-				$(this).val('');
+		if($(this).attr('data') === "add") {
+			let songObj = buildSongObj();
+			model.addSong(songObj)
+			.then(function(data) {
+				console.log('saved', data.key);
+				$('.add__controls').each(function() {
+					$(this).val('');
+				});
 			});
-		});
+		} else {
+			console.log('we will edit', $(this).attr('data'),buildSongObj());
+			let songId = $(this).attr('data');
+			let songObj = buildSongObj();
+			model.editSong(songId, songObj)
+			.then(function() {
+				console.log('edited');
+				$('#addHeading').html('Add Song');
+				$('#addButton').html('Add');
+				$('#addButton').attr('data', "add");
+				$('.add__controls').each(function() {
+					$(this).val('');
+				});
+			});
+		}
 	});
 
 });
