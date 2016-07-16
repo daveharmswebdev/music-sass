@@ -21,7 +21,17 @@ render.renderFilter = (data) => {
 		artists: data.artists
 	}));
 };
-render.renderAddForm = () => $('.addFilter').append(addForm);
+render.addForm = () => $('.addFilter').append(addForm);
 render.renderList = (data) => $('.list').append(list({songs: data}));
+render.displaySongs= (data) => {
+	let songs = data.val();
+	let songsArray = [];
+	for (let song in songs) {
+		songs[song].id = song;
+		songsArray.push(songs[song]);
+	}
+	console.log(songsArray);
+	$('.list').html(list({songs:songsArray}));
+};
 
 module.exports = render;
