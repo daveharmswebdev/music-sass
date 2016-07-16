@@ -1,5 +1,9 @@
 <div class="list--list">
 	{{#each songs}}
-	<p>{{title}} - by {{artist}} on the album {{album}}, year {{year}}</p>
+		<p>
+			{{title}} - by {{artist}} on the album {{album}}, year {{year}}
+			<a data="{{id}}" href="#">Edit</a>
+			<a data="{{id}}" href="#">Delete</a>
+		</p>
 	{{/each}}
 </div>
