@@ -1,33 +1,54 @@
 'use strict';
 
 const $ = require('jQuery');
-const model = require('../src/model');
-const render = require('../src/render');
 
-render.renderBody();
-render.addForm();
-model.getSongs(showList);
+$(function() {
 
-function showList(data) {
-	render.displaySongs(data);
-}
+	const model = require('../src/model');
+	const render = require('../src/render');
 
-function buildSongObj() {
-    let songObj = {
-    title: $("#titleInput").val(),
-    artist: $("#artistInput").val(),
-    album: $("#albumInput").val(),
-    year: $("#yearInput").val()
-  };
-  return songObj;
-}
+	render.renderBody();
+	render.addForm();
+	model.getSongs(showList);
 
-$('body').on('click', '#addButton', () => {
-	let songObj = buildSongObj();
+	function showList(data) {
+		render.displaySongs(data);
+	}
+
+	function buildSongObj() {
+		let songObj = {
+			title: $("#titleInput").val(),
+			artist: $("#artistInput").val(),
+			album: $("#albumInput").val(),
+			year: $("#yearInput").val()
+		};
+		console.log(songObj);
+
+		return songObj;
+	}
+
+	$('body').on('click', '.editSong', function() {
+		let songId = $(this).attr('data');
+		console.log('edit', $(this), songId);
+	});
+
+	$('body').on('click', '.deleteSong', function() {
+		let songId = $(this).attr('data');
+		console.log('delete', $(this), songId);
+	});
+
+	$('body').on('click', '#addButton', () => {
+		let songObj = buildSongObj();
+		model.addSong(songObj)
+		.then(function(data) {
+			console.log('saved', data.key);
+			$('.add__controls').each(function() {
+				$(this).val('');
+			});
+		});
+	});
 
 });
-
-
 
 
 

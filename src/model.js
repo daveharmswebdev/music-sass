@@ -10,6 +10,11 @@ function getSongs(callback) {
   });
 }
 
+function addSong(song) {
+  console.log(song);
+  return songsRef.push(song);
+}
+
 // function getSongs(callback) {
 //   firebase.database().ref('song').on('value', function(songData) {
 //     console.log('something happened');
@@ -18,5 +23,6 @@ function getSongs(callback) {
 // }
 
 module.exports = {
-  getSongs
+  getSongs,
+  addSong
 };

@@ -2,8 +2,8 @@
 	{{#each songs}}
 		<p>
 			{{title}} - by {{artist}} on the album {{album}}, year {{year}}
-			<a data="{{id}}" href="#">Edit</a>
-			<a data="{{id}}" href="#">Delete</a>
+			<a class="editSong" data="{{id}}" href="#">Edit</a>
+			<a class="deleteSong" data="{{id}}" href="#">Delete</a>
 		</p>
 	{{/each}}
 </div>
