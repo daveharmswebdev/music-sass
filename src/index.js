@@ -1,3 +1,5 @@
+/* jshint -W079 */
+
 'use strict';
 
 const $ = require('jQuery');
@@ -29,15 +31,27 @@ $(function() {
 
 	$('body').on('click', '.editSong', function() {
 		let songId = $(this).attr('data');
-		console.log('edit', $(this), songId);
+		model.getSong(songId)
+		.then(function(song) {
+			console.log(song.val());
+			render.addForm(song.val());
+			$('#addHeading').html('Edit Song');
+			$('#addButton').html('Edit');
+		});
 	});
 
 	$('body').on('click', '.deleteSong', function() {
 		let songId = $(this).attr('data');
-		console.log('delete', $(this), songId);
+		model.deleteSong(songId)
+		.then(function() {
+			console.log('deleted ', songId);
+		});
 	});
 
-	$('body').on('click', '#addButton', () => {
+	$('body').on('click', '#addButton', function() {
+		// need to prevent empty songs from being added
+		// need to finish if statement and then add the edit functionality
+		console.log($(this).attr('data') === "add");
 		let songObj = buildSongObj();
 		model.addSong(songObj)
 		.then(function(data) {

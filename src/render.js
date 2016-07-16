@@ -21,7 +21,7 @@ render.renderFilter = (data) => {
 		artists: data.artists
 	}));
 };
-render.addForm = () => $('.addFilter').append(addForm);
+render.addForm = (song) => $('.addFilter').html(addForm(song));
 render.renderList = (data) => $('.list').append(list({songs: data}));
 render.displaySongs= (data) => {
 	let songs = data.val();

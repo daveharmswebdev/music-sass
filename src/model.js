@@ -15,14 +15,23 @@ function addSong(song) {
   return songsRef.push(song);
 }
 
-// function getSongs(callback) {
-//   firebase.database().ref('song').on('value', function(songData) {
-//     console.log('something happened');
-//     callback(songData.val());
-//   });
+function deleteSong(songId) {
+  return songsRef.child(songId).remove();
+}
+
+function getSong(songId) {
+  return songsRef.child(songId).once('value', function(snapShot) {
+    return snapShot;
+  });
+}
+
+// function editSong(songId, songObj) {
+//
 // }
 
 module.exports = {
   getSongs,
-  addSong
+  addSong,
+  deleteSong,
+  getSong
 };

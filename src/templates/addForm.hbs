@@ -1,7 +1,24 @@
 <div class="add">
-	<div class="add__row"><label class="add__labels" for="name">Title: <input id="titleInput" class="add__controls" type="text" name="name"></label></div>
-	<div class="add__row"><label class="add__labels" for="artist">Artist: <input id="artistInput" class="add__controls" type="text" name="artist"></label></div>
-	<div class="add__row"><label class="add__labels" for="album">Album: <input id="albumInput" class="add__controls" type="text" name="album"></label></div>
-	<div class="add__row"><label class="add__labels" for="album">Year: <input id="yearInput" class="add__controls" type="text" name="year"></label></div>
-	<div class="add__row"><button class="btn btn-default add__controls" id='addButton'>Add</button></div>
+	<h2 id="addHeading">Add Music</h2>
+	<div class="add__row">
+		<label class="add__labels" for="name">
+			Title: <input id="titleInput" class="add__controls" type="text" name="name" value="{{title}}">
+		</label>
+	</div>
+	<div class="add__row">
+		<label class="add__labels" for="artist">
+			Artist: <input id="artistInput" class="add__controls" type="text" name="artist" value="{{artist}}">
+		</label>
+	</div>
+	<div class="add__row">
+		<label class="add__labels" for="album">
+			Album: <input id="albumInput" class="add__controls" type="text" name="album" value="{{album}}">
+		</label>
+	</div>
+	<div class="add__row">
+		<label class="add__labels" for="album">
+			Year: <input id="yearInput" class="add__controls" type="text" name="year" value="{{year}}">
+		</label>
+	</div>
+	<div class="add__row"><button class="btn btn-default add__controls" id='addButton' data="add">Add</button></div>
 </div>
