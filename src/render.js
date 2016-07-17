@@ -31,7 +31,6 @@ render.displaySongs= (data, heading) => {
 		songs[song].id = song;
 		songsArray.push(songs[song]);
 	}
-	console.log(songsArray);
 	$('.list').html(list({songs:songsArray, heading: heading}));
 };
 
