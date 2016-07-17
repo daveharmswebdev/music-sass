@@ -2,38 +2,40 @@
 
 const fireBase = require('../src/fireBaseConfig');
 const songsRef = fireBase.database().ref('songs');
+const _ = require('underscore');
 
-function getSongs(callback) {
+var model = {};
+model.getSongs = function(callback) {
   songsRef.on('value', function(data) {
-    console.log(data.val());
     callback(data);
   });
-}
+};
 
-function addSong(song) {
+model.getSnapShot = function() {
+  return songsRef.once('value', function(snapShot) {
+    return snapShot;
+  });
+};
+model.addSong = function(song) {
   console.log(song);
   return songsRef.push(song);
-}
-
-function deleteSong(songId) {
+};
+model.deleteSong = function(songId) {
   return songsRef.child(songId).remove();
-}
-
-function getSong(songId) {
+};
+model.getSong = function(songId) {
   return songsRef.child(songId).once('value', function(snapShot) {
     return snapShot;
   });
-}
-
-function editSong(songId, songObj) {
+};
+model.editSong = function(songId, songObj) {
   console.log('edit', songId, songObj);
   return songsRef.child(songId).update(songObj);
-}
-
-module.exports = {
-  getSongs,
-  addSong,
-  deleteSong,
-  getSong,
-  editSong
 };
+model.filterSong = function(value, arg) {
+  return songsRef.orderByChild(value).equalTo(arg).once('value', function(snapShot) {
+    return snapShot;
+  });
+};
+
+module.exports = model;

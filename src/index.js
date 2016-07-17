@@ -8,14 +8,41 @@ $(function() {
 
 	const model = require('../src/model');
 	const render = require('../src/render');
+	const _ = require('underscore');
 
 	render.renderBody();
-	render.addForm();
 	model.getSongs(showList);
+
 
 	function showList(data) {
 		render.displaySongs(data);
+		getOptions();
 	}
+
+	function getOptions() {
+		console.log('getoptions called');
+		model.getSnapShot()
+		.then(function(snapShot) {
+			let artists = [],
+			    albums = [];
+			for (let key in snapShot.val()) {
+				artists.push(snapShot.val()[key].artist);
+				albums.push(snapShot.val()[key].album);
+			}
+			artists = _.uniq(artists).sort();
+			albums = _.uniq(albums).sort();
+			console.log(albums, artists);
+			render.filter(albums, artists);
+		});
+	}
+
+	// function getArtists() {
+	// 	let snapShot = model.getSnapShot().then(function(data) {
+	// 		return data;
+	// 	});
+	// 	console.log(snapShot);
+	// 	return _.uniq(artists).sort();
+	// }
 
 	function buildSongObj() {
 		let songObj = {
@@ -75,60 +102,7 @@ $(function() {
 			});
 		}
 	});
-
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// const loadSongs = require('../src/loadSongs.js');
-// const render = require('../src/render.js');
-
-// let songs;
-//
-// loadSongs.read().then((data) => {
-// 	console.log(data);
-// 	render.renderBody(data);
-// 	render.renderFilter(data);
-// 	console.log('data', data);
-// 	render.renderList(data.songs);
-// });
-// $('body').on('click', '#addMusicLink', () => {
-// 	console.log('add music');
-// 	$('.filter').remove();
-// 	render.renderAddForm();
-// });
-// $('body').on('click', '#filterMusicLink', () => {
-// 	let data = {};
-// 	data.artists = loadSongs.getArtists();
-// 	data.albums = loadSongs.getAlbums();
-// 	console.log(data);
-// 	$('.add').remove();
-// 	render.renderFilter(data);
-// });
-// $('body').on('click', '#addButton', () => {
-// 	let newSong = {};
-// 	newSong.title = $('#titleInput').val();
-// 	newSong.artist = $('#artistInput').val();
-// 	newSong.album = $('#albumInput').val();
-// 	loadSongs.setSongs(newSong);
-// 	$('.list--list').remove();
-// 	render.renderList(loadSongs.getSongs());
-// 	// need to add to songs array
-// 	// need to push to firebase
-// 	// rerender list
-// });
-
 
 
 
