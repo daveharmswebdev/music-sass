@@ -24,7 +24,7 @@ render.renderFilter = (data) => {
 render.filter = (albums, artists) => $('.addFilter').html(filter({albums: albums, artists: artists}));
 render.addForm = (song) => $('.addFilter').html(addForm(song));
 render.renderList = (data) => $('.list').append(list({songs: data}));
-render.displaySongs= (data) => {
+render.displaySongs= (data, heading) => {
 	let songs = data.val();
 	let songsArray = [];
 	for (let song in songs) {
@@ -32,7 +32,7 @@ render.displaySongs= (data) => {
 		songsArray.push(songs[song]);
 	}
 	console.log(songsArray);
-	$('.list').html(list({songs:songsArray}));
+	$('.list').html(list({songs:songsArray, heading: heading}));
 };
 
 module.exports = render;

@@ -32,7 +32,7 @@ model.editSong = function(songId, songObj) {
   console.log('edit', songId, songObj);
   return songsRef.child(songId).update(songObj);
 };
-model.filterSong = function(value, arg) {
+model.filterSongs = function(value, arg) {
   return songsRef.orderByChild(value).equalTo(arg).once('value', function(snapShot) {
     return snapShot;
   });

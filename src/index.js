@@ -1,4 +1,5 @@
 /* jshint -W079 */
+/* jshint -W117 */
 
 'use strict';
 
@@ -15,7 +16,8 @@ $(function() {
 
 
 	function showList(data) {
-		render.displaySongs(data);
+		let heading = 'Song List';
+		render.displaySongs(data, heading);
 		getOptions();
 	}
 
@@ -36,13 +38,32 @@ $(function() {
 		});
 	}
 
-	// function getArtists() {
-	// 	let snapShot = model.getSnapShot().then(function(data) {
-	// 		return data;
-	// 	});
-	// 	console.log(snapShot);
-	// 	return _.uniq(artists).sort();
-	// }
+	$('body').on('click', '#btnFilter', function() {
+		let artist = $('#artistFilter').val();
+		let album = $('#albumFilter').val();
+		let value,
+				arg;
+		if (artist === 'No Selection' && album === 'No Selection') {
+			alert('No filter selection made');
+		} else if (artist === 'No Selection') {
+			value = 'album';
+			arg = album;
+		} else {
+			value = 'artist';
+			arg = artist;
+		}
+		console.log('click filter', value, arg);
+		model.filterSongs(value, arg)
+		.then(function(songs) {
+			console.log(songs.val());
+		});
+	});
+
+	$('body').on('click', '#btnClearFilter', function() {
+		console.log('click ClearFilter');
+		$('#artistFilter').val('No Selection').change();
+		$('#albumFilter').val('No Selection').change();
+	});
 
 	function buildSongObj() {
 		let songObj = {
