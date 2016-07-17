@@ -13,6 +13,7 @@ $(function() {
 
 	// initial load of screen
 	render.renderBody();
+	// uses firebase on, change listener
 	model.getSongs(showList);
 
 	// helper functions
@@ -32,7 +33,7 @@ $(function() {
 	// and gives heading to hbs file.
 	function showList(data) {
 		render.displaySongs(data, "Song List");
-		getOptions();
+		if ($('.filter').length) getOptions();
 	}
 
 	// used to load the filter selects
@@ -56,6 +57,30 @@ $(function() {
 		});
 	}
 
+	// nav control Handlebars
+	$('body').on('click','.nav__links__items', function() {
+		let linkEl = $(this)[0].id;
+		 switch (linkEl) {
+			 case 'filterMusicLink':
+			 	getOptions();
+			 	break;
+			 case 'addMusicLink':
+			 	render.addForm();
+			 	break;
+			 case 'viewMusicLink':
+			 	model.getSnapShot()
+				.then(function(snapShot) {
+					showList(snapShot);
+				})
+				.catch(function(error) {
+			    // Handle Errors here.
+			    var errorCode = error.code;
+			    var errorMessage = error.message;
+					console.log(errorCode, errorMessage);
+			  });
+			 	break;
+		 }
+	});
 
 	$('body').on('click', '#btnFilter', function() {
 		let artist = $('#artistFilter').val();
