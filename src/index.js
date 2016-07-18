@@ -7,6 +7,7 @@ const $ = require('jQuery');
 
 $(function() {
 
+	let login = require('../src/login');
 	const model = require('../src/model');
 	const render = require('../src/render');
 	const _ = require('underscore');
@@ -58,6 +59,23 @@ $(function() {
 	}
 
 	// nav control Handlebars
+	$('body').on('click', '#login', function() {
+		login()
+		.then(function(result) {
+			let user = result.user;
+			console.log('login', user);
+		}).catch(function(error) {
+			// Handle Errors here.
+			var errorCode = error.code;
+			var errorMessage = error.message;
+			// The email of the user's account used.
+			var email = error.email;
+			// The firebase.auth.AuthCredential type that was used.
+			var credential = error.credential;
+			// ...
+		});
+	});
+
 	$('body').on('click','.nav__links__items', function() {
 		let linkEl = $(this)[0].id;
 		 switch (linkEl) {
@@ -147,6 +165,13 @@ $(function() {
 		});
 	});
 
+	$('body').on('click', '.deleteSong', function() {
+		let songId = $(this).attr('data');
+		model.deleteSong(songId)
+		.then(function() {
+			console.log('deleted ', songId);
+		});
+	});
 
 	$('body').on('click', '#addButton', function() {
 		// need to prevent empty songs from being added
@@ -180,10 +205,19 @@ $(function() {
 	});
 });
 
-$('body').on('click', '.deleteSong', function() {
-	let songId = $(this).attr('data');
-	model.deleteSong(songId)
-	.then(function() {
-		console.log('deleted ', songId);
-	});
-});
+
+// .then(function(result) {
+// 	var user = result.user;
+// 	console.log('logged in user', user.uid);
+// 	// db.getSongs(templates.makeSongList);
+// }).catch(function(error) {
+// 	// Handle Errors here.
+// 	var errorCode = error.code;
+// 	var errorMessage = error.message;
+// 	// The email of the user's account used.
+// 	var email = error.email;
+// 	// The firebase.auth.AuthCredential type that was used.
+// 	var credential = error.credential;
+// 	// ...
+// });
+// });
