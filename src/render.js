@@ -20,9 +20,6 @@ render.filter = (albums, artists) => $('.addFilter').html(filter({albums: albums
 // when a song is passed to the add form this is edit, no song tis is add
 // probably should change name to addEditForm
 render.addForm = song => $('.addFilter').html(addForm(song));
-// renderLis is not being used, need to test and see if it can be deleted.
-render.renderList = data => $('.list').append(list({songs: data}));
-// this is what was written to replace render list
 render.displaySongs= (data, heading) => {
 	let songs = data.val();
 	// songsArray is created to be passed to the hbs template
@@ -38,5 +35,3 @@ render.displaySongs= (data, heading) => {
 };
 
 module.exports = render;
-
-// render.renderFilter = data => $('.addFilter').append(filter({ albums: data.albums, artists: data.artists }));

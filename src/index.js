@@ -50,9 +50,10 @@ $(function() {
 				albums.push(snapShot.val()[key].album);
 			}
 			// uses underscore to find unique values
-			// and sort
-			artists = _.uniq(artists).sort();
-			albums = _.uniq(albums).sort();
+			// and sort had to use lowercase to sort
+			// alphabetically properly
+			artists = _.uniq(artists.map(artist => artist.toLowerCase()).sort());
+			albums = _.uniq(albums.map(album => album.toLowerCase()).sort());
 			// displays the filter form
 			render.filter(albums, artists);
 		});
@@ -204,20 +205,3 @@ $(function() {
 		}
 	});
 });
-
-
-// .then(function(result) {
-// 	var user = result.user;
-// 	console.log('logged in user', user.uid);
-// 	// db.getSongs(templates.makeSongList);
-// }).catch(function(error) {
-// 	// Handle Errors here.
-// 	var errorCode = error.code;
-// 	var errorMessage = error.message;
-// 	// The email of the user's account used.
-// 	var email = error.email;
-// 	// The firebase.auth.AuthCredential type that was used.
-// 	var credential = error.credential;
-// 	// ...
-// });
-// });
