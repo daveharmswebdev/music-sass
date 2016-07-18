@@ -22,6 +22,7 @@ render.filter = (albums, artists) => $('.addFilter').html(filter({albums: albums
 render.addForm = song => $('.addFilter').html(addForm(song));
 render.displaySongs= (data, heading) => {
 	let songs = data.val();
+	console.log(songs);
 	// songsArray is created to be passed to the hbs template
 	let songsArray = [];
 	for (let song in songs) {

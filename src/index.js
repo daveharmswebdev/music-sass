@@ -52,8 +52,8 @@ $(function() {
 			// uses underscore to find unique values
 			// and sort had to use lowercase to sort
 			// alphabetically properly
-			artists = _.uniq(artists.map(artist => artist.toLowerCase()).sort());
-			albums = _.uniq(albums.map(album => album.toLowerCase()).sort());
+			artists = _.uniq(artists).sort();
+			albums = _.uniq(albums).sort();
 			// displays the filter form
 			render.filter(albums, artists);
 		});
@@ -116,11 +116,12 @@ $(function() {
 			value = 'artist';
 			arg = artist;
 		}
+		console.log(value,arg);
 		model.filterSongs(value, arg)
 		.then(function(songs) {
 			let data = songs;
 			// passes data and heading info to render.displaySongs();
-			render.displaySongs(data, `Song List - Filterd by ${value}: ${arg}`);
+			render.displaySongs(data, `Song List - Filtered by ${value}: ${arg}`);
 		})
 		.catch(function(error) {
 	    // Handle Errors here.
@@ -135,7 +136,6 @@ $(function() {
 		$('.filter__input').val('No Selection').change().prop('disabled', false);
 		$('#btnFilter').prop('disabled', 'disabled');
 	});
-
 
 	$('body').on('change', '.filter__input', function() {
 		event.preventDefault();

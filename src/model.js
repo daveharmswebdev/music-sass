@@ -30,6 +30,7 @@ model.editSong = (songId,songObj) => songsRef.child(songId).update(songObj);
 // value is either album or artist, arg is artist name or album title
 model.filterSongs = function(value, arg) {
   return songsRef.orderByChild(value).equalTo(arg).once('value', function(snapShot) {
+    console.log('model', snapShot.val());
     return snapShot;
   });
 };
